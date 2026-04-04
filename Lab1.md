@@ -205,7 +205,7 @@ def merge(left_list, right_list):
     sorted_list = []
     left_list_index = right_list_index = 0
     left_list_length, right_list_length = len(left_list), len(right_list)
-    for _ in range(left_list_length + right_list_length):
+    for i in range(left_list_length + right_list_length):
         if left_list_index < left_list_length and right_list_index < right_list_length:
             if left_list[left_list_index] <= right_list[right_list_index]:
                 sorted_list.append(left_list[left_list_index])
