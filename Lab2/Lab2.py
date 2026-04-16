@@ -1,5 +1,6 @@
 import random
 import sys
+from tabulate import tabulate # библиотека для вывода текста в виде таблицы
 
 # Класс для трека
 class Track:
@@ -11,8 +12,10 @@ class Track:
         self.genre = genre
         self.rating = rating
 
+    # строковое представление одного трека
     def __str__(self):
         return f"Трек: {self.name} ({self.duration}с.)\nЖанр: {self.genre}\nРейтинг: {self.rating}"
+
 
 # Основной класс для плейлиста
 class Playlist:
@@ -120,18 +123,8 @@ class Playlist:
         headers = ["№", "Название", "Длительность (с.)", "Жанр", "Рейтинг (*)"]
         rows = [[str(i + 1), t.name, str(t.duration), t.genre, str(t.rating)]
                 for i, t in enumerate(self.tracks)]
-        cols = [len(h) for h in headers]
-        for row in rows:
-            for j, cell in enumerate(row):
-                cols[j] = max(cols[j], len(cell))
-        print("+" + "+".join("-" * (x + 2) for x in cols) + "+")
-        header_line = "| " + " | ".join(h.ljust(cols[i]) for i, h in enumerate(headers)) + " |"
-        print(header_line)
-        print("+" + "+".join("-" * (x + 2) for x in cols) + "+")
-        for row in rows:
-            data_line = "| " + " | ".join(cell.ljust(cols[i]) for i, cell in enumerate(row)) + " |"
-            print(data_line)
-            print("+" + "+".join("-" * (x + 2) for x in cols) + "+")
+        print(tabulate(rows, headers=headers, tablefmt="grid", numalign="center"))
+
 
 # основная функция
 def main():
@@ -184,7 +177,7 @@ def main():
             except ValueError as e:
                 print(e)
         elif command == "delete":
-            name = input("Название трекhelpа для удаления: ").strip()
+            name = input("Название трека для удаления: ").strip()
             if name:
                 playlist.delete_track(name)
             else:
@@ -210,6 +203,7 @@ def main():
                 print("Ошибка: введите число.")
         else:
             print("Неизвестная команда. Введите help.")
+
 
 # запуск программы
 if __name__ == '__main__':
