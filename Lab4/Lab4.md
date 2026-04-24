@@ -56,14 +56,14 @@ class StudentJournal:
     def get_all_students(self):
         result = []
         for stud_id, data in self.students.items():
-            result.append((stud_id, data['name'], data['score']))
+            result.append([stud_id, data['name'], data['score']])
         return result
 
     # Нахождение студента с минимальным баллом
     def find_min_score_student(self):
         if not self.students:
             return None
-        candidates = [(stud_id, data['name'], data['score'])
+        candidates = [[stud_id, data['name'], data['score']]
                       for stud_id, data in self.students.items()
                       if data['score'] is not None]
         if not candidates:
@@ -135,7 +135,7 @@ def get_score_by_name(self, name):
     def get_all_students(self):
         result = []
         for stud_id, data in self.students.items():
-            result.append((stud_id, data['name'], data['score']))
+            result.append([stud_id, data['name'], data['score']])
         return result
 
 # Вывод журнала студентов
@@ -154,7 +154,7 @@ def get_score_by_name(self, name):
 def find_min_score_student(self):
         if not self.students:
             return None
-        candidates = [(stud_id, data['name'], data['score'])
+        candidates = [[stud_id, data['name'], data['score']]
                       for stud_id, data in self.students.items()
                       if data['score'] is not None]
         if not candidates:
